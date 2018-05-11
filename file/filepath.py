@@ -3,6 +3,7 @@ import os
 from .exceptions import PathError
 from .utils import abspath
 
+
 class FilePath:
     def __init__(self, path='.', exist_required=True, ensure=None):
         self.path_list = []
