@@ -90,3 +90,6 @@ class FilePath:
     @property
     def executable(self):
         return os.access(self.path, os.X_OK)
+
+    def unlink(self, file=None):
+        os.unlink(self.getChild(file).path if file else self.path)
