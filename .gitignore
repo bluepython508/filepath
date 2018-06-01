@@ -1,6 +1,6 @@
 env/
 .idea/
 build/
-filepath.egg-info/
+ostools.egg-info/
 dist/
 .python-version
