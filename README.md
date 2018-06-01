@@ -1,2 +1,2 @@
-# FilePath
-FilePath is a simple object-oriented approach to paths.
+# OSTools
+OSTools is a collection of simple OS tools.
