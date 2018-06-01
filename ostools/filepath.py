@@ -5,28 +5,24 @@ from .utils import abspath
 
 
 class FilePath:
-    def __init__(self, path='.', exist_required=True, ensure=None):
+    def __init__(self, path='.', exist_required=True, ensure=None, lazy=False):
         self.path_list = []
         self.exist_required = exist_required
         self.ensure = ensure
         self.path = path
+        self.lazy = lazy
 
     @property
     def path(self):
+        self.check_exists(os.path.join(*self.path_list))
         return os.path.join(*self.path_list)
 
     @path.setter
     def path(self, value):
-        if self.exist_required:
-            if self.ensure:
-                if self.ensure.lower().startswith('dir'):
-                    FilePath(value, False).mkdir(exist_ok=True)
-                elif self.ensure.lower().startswith('file'):
-                    FilePath(value, False).mkfile(exist_ok=True)
-            elif not os.path.exists(value):
-                raise PathError("Path %s does not exist.")
-            value = abspath(value)
-        self.path_list = os.path.split(value)
+        value = abspath(value)
+        if not self.lazy:
+            self.check_exists(value)
+        self.path_list = value.split(os.path.sep)
 
     def getChild(self, child=None, exist_required=None, ensure=None):
         if not child:
@@ -92,4 +88,12 @@ class FilePath:
         return os.access(self.path, os.X_OK)
 
     def unlink(self, file=None):
-        os.unlink(self.getChild(file).path if file else self.path)
+        os.unlink(self.getChild(file).path)
+
+    def check_exists(self, path):
+        if self.ensure.lower().strip().startswith('dir'):
+            FilePath(path).mkdir(exist_ok=True)
+        elif self.ensure.lower().strip().startswith('file'):
+            FilePath(path).mkfile(exist_ok=True)
+        if self.exist_required and not os.path.exists(path):
+            raise PathError("Path %s does not exist.")
