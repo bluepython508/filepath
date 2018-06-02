@@ -1,10 +1,15 @@
 #!/bin/bash
-path=${1:-'.'}
+path=${2:-'.'}
 cd ${path}
 rm -rf ${path}/dist
-echo "Path: ${path}"
+echo "Path is ${path}"
 version=$(python package_version.py)
-read -p "Version (currently ${version}): " version
+if [ -z ${1+x} ]; then
+    read -p "Version (currently ${version}): " version
+else
+    version=$1
+fi
+echo "Version is ${version}"
 echo "version='${version}'" > ${path}/package_version.py
 echo 'print(version)' >> ${path}/package_version.py
 python ${path}/setup.py sdist bdist_wheel
