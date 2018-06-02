@@ -1,5 +1,6 @@
 import copy
 import os
+
 from .exceptions import PathError
 from .utils import abspath
 
@@ -9,7 +10,7 @@ class FilePath:
         self.path_list = []
         self.exist_required = exist_required
         self.ensure = ensure
-        self.path = path
+        self.path = (path.path if isinstance(path, FilePath) else path)
         self.lazy = lazy
 
     @property
