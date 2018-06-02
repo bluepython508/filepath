@@ -4,3 +4,4 @@ build/
 ostools.egg-info/
 dist/
 .python-version
+__pycache__/
