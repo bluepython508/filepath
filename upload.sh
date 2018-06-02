@@ -10,8 +10,10 @@ else
     version=$1
 fi
 echo "Version is ${version}"
-echo "version='${version}'" > ${path}/package_version.py
+echo "version = '${version}'" > ${path}/package_version.py
 echo 'print(version)' >> ${path}/package_version.py
 python ${path}/setup.py sdist bdist_wheel
 twine upload ${path}/dist/*
 rm -rf ${path}/dist ${path}/build ${path}/*.egg-info
+clear
+echo Uploaded ${path} version ${version}
