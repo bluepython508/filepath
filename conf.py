@@ -118,7 +118,8 @@ htmlhelp_basename = 'OSToolsdoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    'papersize': 'a4paper',
+    'papersize': 'a4paper'
+    # 'papersize': 'letterpaper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
@@ -191,6 +192,7 @@ epub_exclude_files = ['search.html']
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
 
 # -- Options for to-do extension ----------------------------------------------
 
