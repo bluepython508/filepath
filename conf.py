@@ -15,18 +15,17 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
-
+import package_version
 
 # -- Project information -----------------------------------------------------
 
 project = 'OSTools'
 copyright = '2018, bluepython508'
 author = 'bluepython508'
-
 # The short X.Y version
-version = ''
+version = '.'.join(package_version.version.split('.')[:2])
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = package_version.version
 
 
 # -- General configuration ---------------------------------------------------
@@ -56,9 +55,11 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
-
+source_suffix = ['.rst', '.md']
+# Render these files as indicated
+source_parsers = {
+    '.md': 'recommonmark.parser.CommonMarkParser'
+}
 # The master toctree document.
 master_doc = 'index'
 

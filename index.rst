@@ -6,16 +6,16 @@
 Welcome to OSTools's documentation!
 ===================================
 
+.. automodule:: ostools
+   :members:
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    path
    filepath
-
-.. automodule:: ostools
-   :members:
-
+   tutorial
 
 Indices and tables
 ==================
