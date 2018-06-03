@@ -11,10 +11,11 @@ class Path:
     and converts each element into a :class:`~ostools.FilePath`, with ``exist_required`` set to false.
 
     Attributes:
-        envvar (str): The environment variable to load the paths from.
-        items (list): The list of paths.
+        envvar (:py:class:`str`): The environment variable to load the paths from.
+        items (:py:class:`list`): The list of paths.
     """
-    def __init__(self, envvar='PATH'):
+
+    def __init__(self, envvar="PATH"):
         """
         Args:
             envvar (str): The environment variable to load the paths from.
@@ -28,7 +29,7 @@ class Path:
         Load the PATH from the environment variable specified in :attr:`envvar`, converting each element into a
         :class:`~ostools.FilePath`, with ``exist_required`` set to false.
         """
-        items = os.environ.get(self.envvar, '').split(':')
+        items = os.environ.get(self.envvar, "").split(":")
         for item in items:
             self.items.append(FilePath(item, exist_required=False))
 

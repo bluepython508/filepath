@@ -1,3 +1,2 @@
 class PathError(Exception):
     pass
-
