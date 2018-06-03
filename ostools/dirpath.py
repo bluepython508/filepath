@@ -7,21 +7,26 @@ class Path:
     """
     This is a class for working with PATHs, like PATH or MANPATH.
 
-    It has the interface of a list. It loads the initial set from an environment variable,
+    It has the interface of a list. It loads the initial list from an environment variable,
     and converts each element into a :class:`~ostools.FilePath`, with ``exist_required`` set to false.
+
+    Attributes:
+        envvar (str): The environment variable to load the paths from.
+        items (list): The list of paths.
     """
     def __init__(self, envvar='PATH'):
         """
         Args:
-            envvar (string): The environment variable to load the paths from.
+            envvar (str): The environment variable to load the paths from.
         """
         self.envvar = envvar
         self.items = []
-        self.load()
+        self.reload()
 
-    def load(self):
+    def reload(self):
         """
-        Loads the
+        Load the PATH from the environment variable specified in :attr:`envvar`, converting each element into a
+        :class:`~ostools.FilePath`, with ``exist_required`` set to false.
         """
         items = os.environ.get(self.envvar, '').split(':')
         for item in items:
@@ -46,11 +51,24 @@ class Path:
         return getattr(self.items, item)
 
     def append(self, item):
+        """
+        This function functions like :py:meth:`list.append`. It also converts the ``item`` into a
+        :class:`~ostools.FilePath`, with ``exist_required`` set to false.
+        """
         self.items.append(FilePath(item, exist_required=False))
 
     def extend(self, items):
+        """
+        This function functions like :py:meth:`list.extend`.
+        It also converts each item into a
+        :class:`~ostools.FilePath`, with ``exist_required`` set to false.
+        """
         for item in items:
             self.append(item)
 
     def insert(self, index, item):
+        """
+        This function functions like :py:meth:`list.insert`. It also converts the ``item`` into a
+        :class:`~ostools.FilePath`, with ``exist_required`` set to false.
+        """
         self.items.insert(index, FilePath(item, exist_required=False))

@@ -15,18 +15,17 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
-
+import package_version
 
 # -- Project information -----------------------------------------------------
 
 project = 'OSTools'
 copyright = '2018, bluepython508'
 author = 'bluepython508'
-
 # The short X.Y version
-version = ''
+version = '.'.join(package_version.version.split('.')[:2])
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = package_version.version
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,6 +47,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.napoleon',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -56,9 +56,11 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
-
+source_suffix = ['.rst', '.md']
+# Render these files as indicated
+source_parsers = {
+    '.md': 'recommonmark.parser.CommonMarkParser'
+}
 # The master toctree document.
 master_doc = 'index'
 
@@ -83,7 +85,7 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -191,7 +193,7 @@ epub_exclude_files = ['search.html']
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {'python': ('https://docs.python.org/3.6', None)}
 
 
 # -- Options for to-do extension ----------------------------------------------
