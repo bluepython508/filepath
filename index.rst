@@ -10,6 +10,11 @@ Welcome to OSTools's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   path
+   filepath
+
+.. automodule:: ostools
+   :members:
 
 
 Indices and tables
