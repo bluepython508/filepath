@@ -20,7 +20,6 @@ class FilePath:
 
     def __init__(self, path=".", exist_required=True, ensure=None, lazy=False):
         """
-
         Args:
              path (``Union[:py:class:`os.PathLike`, :py:class:`str`, :py:class:`bytes`]``): The starting path.
              exist_required: See :py:attr:`FilePath.exist_required`
